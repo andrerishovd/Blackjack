@@ -8,8 +8,10 @@ using System.Threading.Tasks;
 class Program {
 	static void Main(string[] args) {
 		CardHandler ch = new CardHandler();
+		GameHandler gh = new();
 
-		ch.DisplayDeck(ch.ShuffleDeck(ch.GenerateOrderedDeck()));
+		//ch.DisplayDeck(ch.ShuffleDeck(ch.GenerateOrderedDeck()));
+		gh.PlaceBet();
 
 	}
 }

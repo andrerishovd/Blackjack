@@ -35,8 +35,6 @@ namespace Blackjack {
 		}
 
 		public Card DrawCard(Stack<Card> cards) {
-			Random rng = new();
-			int index = rng.Next(0, cards.Count);
 			return cards.Pop();
 		}
 
