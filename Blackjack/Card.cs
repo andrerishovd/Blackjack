@@ -7,8 +7,8 @@ using System.Threading.Tasks;
 
 namespace Blackjack {
 	public class Card {
-		private Suit Suit { get; set; }
-		private CardNumber CardNumber { get; set; }
+		public Suit Suit { get; set; }
+		public CardNumber CardNumber { get; set; }
 
 		public Card(Suit suit, CardNumber number) {
 			Suit = suit;
