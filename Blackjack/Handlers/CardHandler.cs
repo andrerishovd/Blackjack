@@ -27,9 +27,9 @@ namespace Blackjack.Handlers
             return OrderedDeck;
         }
 
-        public Stack<Card> ShuffleDeck(Stack<Card> inputCards)
+        public Stack<Card> ShuffleDeck(Stack<Card> cardStack)
         {
-            List<Card> cards = inputCards.ToList();
+            List<Card> cards = cardStack.ToList();
             Stack<Card> ShuffledDeck = new();
             Random rng = new();
 

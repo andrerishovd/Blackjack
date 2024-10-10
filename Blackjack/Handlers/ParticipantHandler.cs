@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 namespace Blackjack.Handler {
     public class ParticipantHandler {
         
-        public List<Participant> CreateParticipants() {
+        public List<Participant> GenerateParticipants() {
             List<Participant> participants = [];
 			List<Card> cards = [];
 			participants.AddRange(new List<Participant> {
@@ -31,7 +31,6 @@ namespace Blackjack.Handler {
 					cards
 				)
 			});
-
             return participants;
         }
 

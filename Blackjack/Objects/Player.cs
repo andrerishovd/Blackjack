@@ -14,6 +14,10 @@ namespace Blackjack.Players
             Balance = balance;
         }
 
+		public override string? ToString() {
+			return $"Dealer: {Name} Card(s): {Cards.ToString} Balance: {Balance}";
+		}
 
-    }
+
+	}
 }

@@ -1,4 +1,5 @@
 ﻿using Blackjack.Enums;
+using Blackjack.Handler;
 using Blackjack.Objects;
 using Blackjack.Players;
 using System;
@@ -11,66 +12,61 @@ namespace Blackjack.Handlers
 {
     public class GameHandler
     {
-        bool YourTurn = true;
-        bool BetsPlaced = false;
-        int DealerStands = 17;
-        int BlackJack = 21;
-        double Balance = 100;
-        double Multiplier = 2.5;
+        public bool YourTurn = false;
+        public bool BetsPlaced = false;
+        public int DealerStands = 17;
+        public int BlackJack = 21;
+        public double Multiplier = 2.5;
+        public int RoundNumber = 1;
 
-        List<Card> YourCards = [];
-        List<Card> DealersCards = [];
-        List<Participant> Participants = [];
+        public List<Participant> Participants = [];
 
-        Stack<Card> CurrentDeck = new();
+        public Stack<Card> CurrentDeck = new();
 
-        CardHandler CardHandler = new();
-        BettingHandler BettingHandler = new();
+        public CardHandler CardHandler = new();
+        public BettingHandler BettingHandler = new();
+        public ParticipantHandler ParticipantHandler = new();
 
 
-        public void BlackJackGame()
-        {
+        public void BlackJackGame() {
             CurrentDeck = CardHandler.ShuffleDeck(CardHandler.GenerateOrderedDeck());
-            //BettingHandler.Balance = Balance;
+            CardHandler.DisplayDeck(CurrentDeck);
+            Participants = ParticipantHandler.GenerateParticipants();
+            BlackJackRound();
+		}
 
+        public void BlackJackRound() {
+            Console.WriteLine($"\nStarting round {RoundNumber}");
+			//PlaceBet(10);
+			//CurrentDeck = CardHandler.ShuffleDeck(CurrentDeck);
+			DealCards();
+            
+			//DealCards();
+            RoundNumber++;
+		}
 
-            //while(YourCards.get
-        }
-
-        public void BlackJackRound()
-        {
-            PlaceBet();
-            CurrentDeck = CardHandler.ShuffleDeck(CurrentDeck);
-
-        }
-
-        public void DealCards()
-        {
-            foreach (List<Card>> player in Players)
-            {
+        public void DealCards() {
+            foreach (Participant participant in Participants) {
                 Card newCard = CardHandler.DrawCard(CurrentDeck);
-                player.Add(newCard);
+				participant.Cards.Add(newCard);
+                participant.ToString();
             }
         }
 
-        public void PlaceBet()
-        {
+        public void PlaceBet(int balance) {
             int HardBet = 50;
             Console.WriteLine("Placing bets");
             Thread.Sleep(3000);
-            Bet ThisRoundBet = BettingHandler.NewBet(Balance, HardBet, Multiplier);
+            Bet ThisRoundBet = BettingHandler.NewBet(balance, HardBet, Multiplier);
             Console.WriteLine(ThisRoundBet.PotentialPayout);
         }
 
-        public int ReturnCurrentNumber(List<Card> cards)
-        {
-            int CurrentNumber = 0;
-            foreach (Card card in cards)
-            {
-                CurrentNumber += (int)card.CardNumber;
-
+        public int ReturnCurrentNumber(List<Card> cards) {
+            int CurrentSum = 0;
+            foreach (Card card in cards) {
+                CurrentSum += (int)card.CardNumber;
             }
-            return CurrentNumber;
+            return CurrentSum;
         }
     }
 }

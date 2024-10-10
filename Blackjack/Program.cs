@@ -7,8 +7,11 @@ using System.Threading.Tasks;
 
 class Program {
 	static void Main(string[] args) {
-		CardHandler ch = new CardHandler();
+		//CardHandler ch = new CardHandler();
+		//ch.DisplayDeck(ch.ShuffleDeck(ch.GenerateOrderedDeck()));
 
-		ch.DisplayDeck(ch.ShuffleDeck(ch.GenerateOrderedDeck()));
+		GameHandler GameHandler = new();
+
+		GameHandler.BlackJackGame();
 	}
 }

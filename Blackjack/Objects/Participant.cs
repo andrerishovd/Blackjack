@@ -7,8 +7,8 @@ using Blackjack.Objects;
 
 namespace Blackjack.Players {
     public class Participant {
-        String Name;
-        List<Card> Cards = [];
+        public String Name { get; set; }
+        public List<Card> Cards = [];
 
         public Participant(String name, List<Card> cards) {
             Name = name;
