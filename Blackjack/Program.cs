@@ -1,4 +1,4 @@
-﻿using Blackjack;
+﻿using Blackjack.Handlers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,10 +8,7 @@ using System.Threading.Tasks;
 class Program {
 	static void Main(string[] args) {
 		CardHandler ch = new CardHandler();
-		GameHandler gh = new();
 
-		//ch.DisplayDeck(ch.ShuffleDeck(ch.GenerateOrderedDeck()));
-		gh.PlaceBet();
-
+		ch.DisplayDeck(ch.ShuffleDeck(ch.GenerateOrderedDeck()));
 	}
 }
