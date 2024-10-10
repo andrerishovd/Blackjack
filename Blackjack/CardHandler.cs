@@ -10,30 +10,37 @@ using System.Threading.Tasks;
 namespace Blackjack {
 	public class CardHandler {
 
-		public List<Card> GenerateOrderedDeck() {
-			List<Card> OrderedDeck = new();
+		public Stack<Card> GenerateOrderedDeck() {
+			Stack<Card> OrderedDeck = new();
 
 			foreach (Suit suit in Enum.GetValues(typeof(Suit))) {
 				foreach (CardNumber number in Enum.GetValues(typeof(CardNumber))) {
-					OrderedDeck.Add(new Card(suit, number));
+					OrderedDeck.Push(new Card(suit, number));
 				}
 			}
 			return OrderedDeck;
 		}
 
-		public List<Card> ShuffleDeck(List<Card> cards) {
-			List<Card> ShuffledDeck = new();
+		public Stack<Card> ShuffleDeck(Stack<Card> inputCards) {
+			List<Card> cards = inputCards.ToList();
+			Stack<Card> ShuffledDeck = new();
 			Random rng = new();
 
 			while(cards.Count > 0) {
 				int index = rng.Next(0, cards.Count);
-				ShuffledDeck.Add(cards[index]);
+				ShuffledDeck.Push(cards[index]);
 				cards.RemoveAt(index);
 			}
 			return ShuffledDeck;
 		}
 
-		public void DisplayDeck(List<Card> cards) {
+		public Card DrawCard(Stack<Card> cards) {
+			Random rng = new();
+			int index = rng.Next(0, cards.Count);
+			return cards.Pop();
+		}
+
+		public void DisplayDeck(Stack<Card> cards) {
 			foreach(Card card in cards) {
                 Console.WriteLine(card);
 			}
